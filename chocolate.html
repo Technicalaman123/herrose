@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Chocolate Day, My Sweetest! 🍫</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root {
+            --choc-dark: #3d1b10;
+            --choc-light: #5d4037;
+            --gold: #d4af37;
+            --cream: #fff5e1;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--choc-dark), var(--choc-light));
+            font-family: 'Poppins', sans-serif;
+            color: var(--cream);
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* Floating Animation */
+        .floating {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: -1;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        header {
+            padding: 50px 20px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--gold);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            margin: 0;
+        }
+
+        .sub-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        /* Chocolate Box Grid */
+        .box-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border: 2px solid var(--gold);
+        }
+
+        .choc-item {
+            background: var(--cream);
+            height: 120px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .choc-item:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        /* Message Overlay */
+        #msg-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--cream);
+            color: var(--choc-dark);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            z-index: 100;
+            max-width: 80%;
+            border: 4px solid var(--gold);
+        }
+
+        #msg-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .close-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: var(--choc-dark);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .footer-note {
+            margin-top: 50px;
+            padding: 40px;
+            font-size: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .final-btn {
+            padding: 15px 30px;
+            background: var(--gold);
+            color: var(--choc-dark);
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Happy Chocolate Day! 🍫</h1>
+        <p class="sub-text">Duniya ki sabse mithi cheez... tumhare liye.</p>
+    </header>
+
+    <p>Har chocolate mein ek mitha raaz chhupa hai. Tap karke dekho!</p>
+
+    <div class="box-container">
+        <div class="choc-item" onclick="showMsg('Dairy Milk: Tumhari baaton mein wahi mithaas hai jo mujhe har mushkil mein sukoon deti hai. ✨')">🍫</div>
+        <div class="choc-item" onclick="showMsg('Ferrero Rocher: Tum mere liye sabse precious aur premium ho. Tum jaisa koi nahi! 💎')">🌰</div>
+        <div class="choc-item" onclick="showMsg('KitKat: Jab bhi life mein stress hota hai, tumhare saath ek chota sa break sab thik kar deta hai. ☕')">🍫</div>
+        <div class="choc-item" onclick="showMsg('Dark Chocolate: Humara rishta is dark chocolate ki tarah strong aur deep hai. 🖤')">🍪</div>
+        <div class="choc-item" onclick="showMsg('Silk: Tumhare saath bitaya har pal bilkul Silk ki tarah smooth aur haseen hota hai. ✨')">💜</div>
+        <div class="choc-item" onclick="showMsg('Surprise!: Chocolate toh aaj khatam ho jayegi, par mera pyar hamesha rahega. ❤️')">🎁</div>
+    </div>
+
+    <div id="msg-box">
+        <p id="msg-text"></p>
+        <button class="close-btn" onclick="closeMsg()">Sweet! ❤️</button>
+    </div>
+
+    <div class="footer-note">
+        <p>"Tumhari smile chocolate se bhi zyada mithi hai... <br>
+        Isi mithaas ko poori zindagi barkaraar rakhna chahta hoon."</p>
+        <a href="https://wa.me/?text=I%20loved%20the%20chocolates!%20Happy%20Chocolate%20Day!%20❤️" class="final-btn">Send me a Sweet Reply! 💌</a>
+    </div>
+
+    <script>
+        // Floating Elements
+        function createFloating() {
+            const items = ['🍫', '❤️', '🍪', '✨', '🍭'];
+            const item = document.createElement('div');
+            item.classList.add('floating');
+            item.innerHTML = items[Math.floor(Math.random() * items.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.animationDuration = Math.random() * 3 + 4 + 's';
+            document.body.appendChild(item);
+            setTimeout(() => item.remove(), 6000);
+        }
+        setInterval(createFloating, 400);
+
+        // Message Box Logic
+        function showMsg(text) {
+            document.getElementById('msg-text').innerText = text;
+            document.getElementById('msg-box').style.display = 'block';
+            
+            // Celebration on click
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#3d1b10', '#d4af37', '#ffffff']
+            });
+        }
+
+        function closeMsg() {
+            document.getElementById('msg-box').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

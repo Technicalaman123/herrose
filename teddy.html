@@ -71,9 +71,7 @@ to{opacity:1;transform:translateY(0)}
 <body>
 
 <!-- 🎵 background song -->
-<iframe width="0" height="0"
-src="https://www.youtube.com/embed/sniv52ojRuc?autoplay=1&loop=1&playlist=sniv52ojRuc"
-allow="autoplay"></iframe>
+<!-- background audio will start on first user click (see script at page end) -->
 
 <!-- STEP 1 -->
 <div class="section active" id="s1">
@@ -178,23 +176,18 @@ if(i>=txt.length) clearInterval(t);
   <iframe id="ytplayer" width="0" height="0" src="" frameborder="0" allow="autoplay; encrypted-media" style="position:absolute; left:-9999px; width:0; height:0; overflow:hidden;"></iframe>
   <script>
     (function(){
-      // Use a user gesture (click) to set the iframe to the proper embed URL.
-      // Short URLs (youtube.com/shorts/...) are not valid embed sources.
+      // Start background audio after first user interaction to satisfy browser autoplay policies.
       var started = false;
       function startAudio() {
         if (started) return;
         started = true;
         var iframe = document.getElementById('ytplayer');
-        iframe.src = 'https://youtube.com/shorts/BDzb1VOc8GQ?si=e0jGzwJek8qzpksT';
+        // Use a proper YouTube embed URL (not a shorts URL). Replace the ID if you prefer a different track.
+        iframe.src = 'https://www.youtube.com/embed/sniv52ojRuc?autoplay=1';
         document.body.removeEventListener('click', startAudio);
-        var env = document.getElementById('envelope');
-        if (env) env.removeEventListener('click', startAudio);
       }
 
-      // Start when user clicks anywhere (or when they click the envelope)
       document.body.addEventListener('click', startAudio, { once: true });
-      var envelope = document.getElementById('envelope');
-      if (envelope) envelope.addEventListener('click', startAudio, { once: true });
     })();
   </script>
 
